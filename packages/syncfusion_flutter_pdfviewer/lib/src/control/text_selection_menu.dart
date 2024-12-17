@@ -48,7 +48,7 @@ class _TextSelectionMenuState extends State<TextSelectionMenu> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: kTextSelectionMenuHeight * (widget.canCopy ? 0.8 : 1),
+      height: kTextSelectionMenuHeight * (widget.canCopy ? 1 : 0.8),
       decoration: ShapeDecoration(
         color: widget.themeData!.useMaterial3
             ? (widget.themeData!.colorScheme.brightness == Brightness.light)
