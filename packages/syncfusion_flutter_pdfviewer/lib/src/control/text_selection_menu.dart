@@ -23,6 +23,7 @@ class TextSelectionMenu extends StatefulWidget {
       this.textDirection,
       this.onSelected,
       this.themeData,
+      this.canCopy = true,
       this.localizations});
 
   /// Called when an item is selected
@@ -30,6 +31,8 @@ class TextSelectionMenu extends StatefulWidget {
 
   /// The text direction to use for rendering the text selection menu.
   final TextDirection? textDirection;
+
+  final bool canCopy;
 
   /// The theme data of the text selection menu.
   final ThemeData? themeData;
@@ -45,7 +48,7 @@ class _TextSelectionMenuState extends State<TextSelectionMenu> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: kTextSelectionMenuHeight,
+      height: kTextSelectionMenuHeight * (widget.canCopy ? 0.8 : 1),
       decoration: ShapeDecoration(
         color: widget.themeData!.useMaterial3
             ? (widget.themeData!.colorScheme.brightness == Brightness.light)
@@ -80,13 +83,14 @@ class _TextSelectionMenuState extends State<TextSelectionMenu> {
           child: SingleChildScrollView(
             child: ListBody(
               children: <Widget>[
-                TextSelectionMenuItem(
-                  title: widget.localizations!.pdfTextSelectionMenuCopyLabel,
-                  mode: 'Copy',
-                  onSelected: widget.onSelected,
-                  textDirection: widget.textDirection,
-                  themeData: widget.themeData,
-                ),
+                if (widget.canCopy)
+                  TextSelectionMenuItem(
+                    title: widget.localizations!.pdfTextSelectionMenuCopyLabel,
+                    mode: 'Copy',
+                    onSelected: widget.onSelected,
+                    textDirection: widget.textDirection,
+                    themeData: widget.themeData,
+                  ),
                 TextSelectionMenuItem(
                   title:
                       widget.localizations!.pdfTextSelectionMenuHighlightLabel,

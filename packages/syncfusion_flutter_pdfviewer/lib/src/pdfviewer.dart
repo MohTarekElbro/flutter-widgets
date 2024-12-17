@@ -148,6 +148,7 @@ class SfPdfViewer extends StatefulWidget {
     this.pageSpacing = 4,
     this.controller,
     this.undoController,
+    this.canCopy = true,
     this.onZoomLevelChanged,
     this.canShowPageLoadingIndicator = true,
     this.canShowScrollStatus = true,
@@ -224,6 +225,7 @@ class SfPdfViewer extends StatefulWidget {
     this.canShowPageLoadingIndicator = true,
     this.canShowScrollStatus = true,
     this.onPageChanged,
+    this.canCopy = true,
     this.enableDoubleTapZooming = true,
     this.enableTextSelection = true,
     this.onTextSelectionChanged,
@@ -294,6 +296,7 @@ class SfPdfViewer extends StatefulWidget {
     this.canShowPageLoadingIndicator = true,
     this.canShowScrollStatus = true,
     this.onPageChanged,
+    this.canCopy = true,
     this.enableDoubleTapZooming = true,
     this.enableTextSelection = true,
     this.onTextSelectionChanged,
@@ -368,6 +371,7 @@ class SfPdfViewer extends StatefulWidget {
     this.canShowPageLoadingIndicator = true,
     this.canShowScrollStatus = true,
     this.onPageChanged,
+    this.canCopy = true,
     this.enableDoubleTapZooming = true,
     this.enableTextSelection = true,
     this.onTextSelectionChanged,
@@ -893,6 +897,8 @@ class SfPdfViewer extends StatefulWidget {
   ///
   /// See also: [PdfPageChangedDetails].
   final PdfPageChangedCallback? onPageChanged;
+
+  final bool canCopy;
 
   /// Called when tapped on the [SfPdfViewer].
   ///
@@ -4572,6 +4578,7 @@ class SfPdfViewerState extends State<SfPdfViewer> with WidgetsBindingObserver {
           child: TextSelectionMenu(
             themeData: _themeData,
             localizations: _localizations,
+            canCopy: widget.canCopy,
             onSelected: (String value) {
               if (value != 'Copy') {
                 final PdfAnnotationMode annotationMode = value == 'Highlight'
